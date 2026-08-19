@@ -43,37 +43,51 @@ main {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
+	padding: 0 16px;
 }
 
+/* ===== Brand ===== */
 .brand {
 	font-family: 'Cormorant Garamond', serif;
-	font-size: 13px;
-	letter-spacing: 8px;
+	font-size: clamp(11px, 1.8vw, 13px);
+	letter-spacing: clamp(4px, 1.2vw, 8px);
 	text-transform: uppercase;
 	color: rgba(255, 255, 255, 0.22);
-	margin-bottom: 42px;
+	margin-bottom: clamp(28px, 5vh, 42px);
 	user-select: none;
+	text-align: center;
 }
 
+/* ===== Search shell ===== */
 .search-shell {
 	position: relative;
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: 14px;
+	gap: clamp(8px, 1.5vw, 14px);
+	width: 100%;
+	max-width: 900px;
 }
 
 .wing {
-	width: 104px;
-	height: 104px;
+	width: clamp(48px, 9vw, 104px);
+	height: clamp(48px, 9vw, 104px);
 	filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.04));
 	flex-shrink: 0;
+	transition: opacity 0.3s;
 }
 
+.wing-right {
+	transform: scaleX(-1);
+}
+
+/* ===== Search box ===== */
 .search-box {
 	position: relative;
-	width: 560px;
-	height: 70px;
+	width: 100%;
+	max-width: 560px;
+	height: clamp(54px, 8vw, 70px);
+	flex: 1 1 auto;
 }
 
 .search-box input[type="text"] {
@@ -82,10 +96,10 @@ main {
 	background: rgba(255, 255, 255, 0.035);
 	border: 1.5px solid rgba(255, 255, 255, 0.10);
 	border-radius: 50px;
-	padding: 0 68px 0 36px;
+	padding: 0 clamp(52px, 8vw, 68px) 0 clamp(20px, 4vw, 36px);
 	color: #f0f0f0;
 	font-family: 'Inter', sans-serif;
-	font-size: 17px;
+	font-size: clamp(15px, 2.2vw, 17px);
 	font-weight: 300;
 	letter-spacing: 0.6px;
 	outline: none;
@@ -102,7 +116,7 @@ main {
 	color: rgba(255, 255, 255, 0.32);
 	font-family: 'Cormorant Garamond', serif;
 	font-style: italic;
-	font-size: 21px;
+	font-size: clamp(17px, 3vw, 21px);
 	font-weight: 400;
 	letter-spacing: 1px;
 }
@@ -114,11 +128,11 @@ main {
 
 .search-btn {
 	position: absolute;
-	right: 11px;
+	right: clamp(6px, 1.5vw, 11px);
 	top: 50%;
 	transform: translateY(-50%);
-	width: 48px;
-	height: 48px;
+	width: clamp(40px, 6.5vw, 48px);
+	height: clamp(40px, 6.5vw, 48px);
 	border-radius: 50%;
 	background: rgba(201, 162, 39, 0.07);
 	border: 1px solid rgba(201, 162, 39, 0.28);
@@ -127,6 +141,7 @@ main {
 	justify-content: center;
 	cursor: pointer;
 	transition: background 0.2s, border-color 0.2s;
+	padding: 0;
 }
 
 .search-btn:hover {
@@ -135,42 +150,46 @@ main {
 }
 
 .search-btn svg {
-	width: 19px;
-	height: 19px;
+	width: clamp(16px, 2.8vw, 19px);
+	height: clamp(16px, 2.8vw, 19px);
 	stroke: #c9a227;
 	fill: none;
 }
 
+/* ===== Divider & Tagline ===== */
 .divider {
-	margin-top: 28px;
-	width: 220px;
+	margin-top: clamp(18px, 3.5vh, 28px);
+	width: clamp(140px, 30vw, 220px);
 	height: 1px;
 	background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.35), transparent);
 }
 
 .tagline {
-	margin-top: 18px;
+	margin-top: clamp(12px, 2.5vh, 18px);
 	font-family: 'Cormorant Garamond', serif;
-	font-size: 14px;
+	font-size: clamp(12px, 2vw, 14px);
 	color: rgba(255, 255, 255, 0.18);
-	letter-spacing: 3px;
+	letter-spacing: clamp(1.5px, 0.6vw, 3px);
 	user-select: none;
+	text-align: center;
 }
 
-/* Ошибки */
+/* ===== Errors ===== */
 .error-area {
 	position: absolute;
-	bottom: 40px;
+	bottom: clamp(20px, 4vh, 40px);
 	left: 50%;
 	transform: translateX(-50%);
 	text-align: center;
 	max-width: 90vw;
+	width: 100%;
+	padding: 0 16px;
 }
 
 #sj-error {
 	color: #ff6b6b !important;
 	white-space: pre-wrap;
-	font-size: 14px;
+	font-size: clamp(13px, 2vw, 14px);
 }
 
 #sj-error-code {
@@ -180,7 +199,7 @@ main {
 	margin-top: 6px;
 }
 
-/* Фрейм прокси (когда открывается сайт) */
+/* ===== Proxy frame ===== */
 #sj-frame {
 	border: none;
 	position: absolute;
@@ -192,15 +211,76 @@ main {
 	z-index: 100;
 }
 
-/* Адаптив */
-@media (max-width: 780px) {
+/* ========== Адаптация под разные экраны ========== */
+
+/* Планшеты и меньше */
+@media (max-width: 768px) {
 	.wing {
-		display: none;
+		width: 56px;
+		height: 56px;
 	}
+}
+
+/* Мобильные */
+@media (max-width: 560px) {
+	.wing {
+		display: none; /* на очень узких экранах крылья прячем */
+	}
+
+	.search-shell {
+		gap: 0;
+	}
+
 	.search-box {
-		width: min(560px, 90vw);
+		max-width: 100%;
 	}
+
 	.brand {
-		letter-spacing: 5px;
+		letter-spacing: 4px;
+	}
+}
+
+/* Очень маленькие экраны */
+@media (max-width: 380px) {
+	.search-box input[type="text"] {
+		font-size: 14px;
+		padding-left: 18px;
+	}
+
+	.search-box input[type="text"]::placeholder {
+		font-size: 16px;
+	}
+}
+
+/* Большие мониторы / ультраширокие */
+@media (min-width: 1400px) {
+	.search-box {
+		max-width: 640px;
+		height: 76px;
+	}
+
+	.wing {
+		width: 120px;
+		height: 120px;
+	}
+
+	.brand {
+		font-size: 14px;
+		letter-spacing: 10px;
+	}
+}
+
+/* Высота экрана (вертикальная адаптация) */
+@media (max-height: 600px) {
+	.brand {
+		margin-bottom: 20px;
+	}
+
+	.divider {
+		margin-top: 16px;
+	}
+
+	.tagline {
+		margin-top: 10px;
 	}
 }
