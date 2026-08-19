@@ -6,7 +6,7 @@
 	<title>Свобода</title>
 
 	<link rel="shortcut icon" content="favicon.ico" />
-	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&display=swap" rel="stylesheet">
 
 	<script src="/scram/scramjet.all.js"></script>
 	<script src="/baremux/index.js"></script>
@@ -17,65 +17,38 @@
 	<script src="index.js" defer></script>
 </head>
 <body>
-	<div class="vignette"></div>
-	<div class="stars" id="stars"></div>
-
 	<main>
 		<div class="brand">Свобода</div>
 
-		<form id="sj-form" class="search-shell">
-			<!-- Левое крыло -->
-			<svg class="wing wing-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<defs>
-					<linearGradient id="wgL" x1="100%" y1="50%" x2="0%" y2="50%">
-						<stop offset="0%" stop-color="rgba(255,255,255,0.55)"/>
-						<stop offset="100%" stop-color="rgba(255,255,255,0.03)"/>
-					</linearGradient>
-				</defs>
-				<path d="M90 50 C 75 25, 45 15, 25 25 C 10 35, 10 65, 25 75 C 45 85, 75 75, 90 50"
-				      fill="url(#wgL)" opacity="0.35" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
-				<path d="M90 50 Q 65 46, 35 42" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>
-				<path d="M90 50 Q 65 54, 35 58" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>
+		<form id="sj-form" class="search">
+			<svg class="icon" viewBox="0 0 24 24" fill="none">
+				<circle cx="11" cy="11" r="6.5"
+				        stroke="currentColor"
+				        stroke-width="1.5"/>
+				<path d="M16 16L21 21"
+				      stroke="currentColor"
+				      stroke-width="1.5"
+				      stroke-linecap="round"/>
 			</svg>
 
-			<div class="search-box">
-				<input
-					id="sj-search-engine"
-					value="https://www.google.com/search?q=%s"
-					type="hidden"
-				/>
-				<input
-					id="sj-address"
-					type="text"
-					placeholder="Найди свою свободу..."
-					autocomplete="off"
-					spellcheck="false"
-				/>
-				<button type="submit" class="search-btn" aria-label="Поиск">
-					<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-						<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
-						<line x1="16" y1="8" x2="2" y2="22"/>
-						<line x1="17.5" y1="15" x2="9" y2="15"/>
-					</svg>
-				</button>
-			</div>
+			<input
+				id="sj-search-engine"
+				value="https://www.google.com/search?q=%s"
+				type="hidden"
+			/>
+			<input
+				id="sj-address"
+				class="input"
+				type="text"
+				placeholder="Искать свободно..."
+				autocomplete="off"
+				spellcheck="false"
+				aria-label="Поиск"
+			/>
 
-			<!-- Правое крыло -->
-			<svg class="wing wing-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-				<defs>
-					<linearGradient id="wgR" x1="100%" y1="50%" x2="0%" y2="50%">
-						<stop offset="0%" stop-color="rgba(255,255,255,0.55)"/>
-						<stop offset="100%" stop-color="rgba(255,255,255,0.03)"/>
-					</linearGradient>
-				</defs>
-				<path d="M90 50 C 75 25, 45 15, 25 25 C 10 35, 10 65, 25 75 C 45 85, 75 75, 90 50"
-				      fill="url(#wgR)" opacity="0.35" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
-				<path d="M90 50 Q 65 46, 35 42" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>
-				<path d="M90 50 Q 65 54, 35 58" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>
-			</svg>
+			<span class="shortcut">Enter</span>
 		</form>
 
-		<div class="divider"></div>
 		<div class="tagline">В каждом запросе — простор</div>
 
 		<div class="error-area">
@@ -83,21 +56,5 @@
 			<pre id="sj-error-code"></pre>
 		</div>
 	</main>
-
-	<script>
-		const container = document.getElementById('stars');
-		const starCount = window.innerWidth < 600 ? 40 : 80;
-		for (let i = 0; i < starCount; i++) {
-			const d = document.createElement('div');
-			d.className = 'star';
-			d.style.left = Math.random() * 100 + 'vw';
-			d.style.top = Math.random() * 100 + 'vh';
-			const s = Math.random() * 2.5 + 0.8;
-			d.style.width = s + 'px';
-			d.style.height = s + 'px';
-			d.style.opacity = Math.random() * 0.25 + 0.04;
-			container.appendChild(d);
-		}
-	</script>
 </body>
 </html>
