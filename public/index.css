@@ -1,183 +1,128 @@
 * {
+	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
 }
 
 html, body {
 	width: 100%;
 	height: 100%;
-	background: #030303;
+	background: #090909;
+	font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 	overflow: hidden;
-	font-family: 'Inter', sans-serif;
-}
-
-/* Глубокий виньеточный фон */
-.vignette {
-	position: absolute;
-	inset: 0;
-	background: radial-gradient(ellipse at center, #0a0a0a 0%, #000000 70%);
-	z-index: 0;
-}
-
-/* Поле звёзд */
-.stars {
-	position: absolute;
-	inset: 0;
-	z-index: 1;
-	pointer-events: none;
-}
-
-.star {
-	position: absolute;
-	background: #ffffff;
-	border-radius: 50%;
 }
 
 main {
-	position: relative;
-	z-index: 2;
-	width: 100%;
-	height: 100%;
+	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	padding: 0 16px;
+	padding: 0 20px;
 }
 
 /* ===== Brand ===== */
 .brand {
-	font-family: 'Cormorant Garamond', serif;
-	font-size: clamp(11px, 1.8vw, 13px);
-	letter-spacing: clamp(4px, 1.2vw, 8px);
+	font-size: 13px;
+	font-weight: 500;
+	letter-spacing: 6px;
 	text-transform: uppercase;
-	color: rgba(255, 255, 255, 0.22);
-	margin-bottom: clamp(28px, 5vh, 42px);
+	color: #444;
+	margin-bottom: 36px;
 	user-select: none;
-	text-align: center;
 }
 
-/* ===== Search shell ===== */
-.search-shell {
-	position: relative;
+/* ===== Search bar ===== */
+.search {
+	width: min(620px, calc(100vw - 40px));
+	height: 64px;
 	display: flex;
 	align-items: center;
-	justify-content: center;
-	gap: clamp(8px, 1.5vw, 14px);
-	width: 100%;
-	max-width: 900px;
-}
-
-.wing {
-	width: clamp(48px, 9vw, 104px);
-	height: clamp(48px, 9vw, 104px);
-	filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.04));
-	flex-shrink: 0;
-	transition: opacity 0.3s;
-}
-
-.wing-right {
-	transform: scaleX(-1);
-}
-
-/* ===== Search box ===== */
-.search-box {
-	position: relative;
-	width: 100%;
-	max-width: 560px;
-	height: clamp(54px, 8vw, 70px);
-	flex: 1 1 auto;
-}
-
-.search-box input[type="text"] {
-	width: 100%;
-	height: 100%;
-	background: rgba(255, 255, 255, 0.035);
-	border: 1.5px solid rgba(255, 255, 255, 0.10);
-	border-radius: 50px;
-	padding: 0 clamp(52px, 8vw, 68px) 0 clamp(20px, 4vw, 36px);
-	color: #f0f0f0;
-	font-family: 'Inter', sans-serif;
-	font-size: clamp(15px, 2.2vw, 17px);
-	font-weight: 300;
-	letter-spacing: 0.6px;
-	outline: none;
-	backdrop-filter: blur(18px) saturate(1.2);
+	gap: 16px;
+	padding: 0 22px;
+	background: #111111;
+	border: 1px solid #242424;
+	border-radius: 18px;
 	box-shadow:
-		inset 0 1px 0 rgba(255, 255, 255, 0.06),
-		0 30px 60px rgba(0, 0, 0, 0.55),
-		0 0 0 1px rgba(0, 0, 0, 0.5);
-	text-overflow: ellipsis;
-	transition: border-color 0.25s, background 0.25s;
+		0 20px 60px rgba(0, 0, 0, .45),
+		inset 0 1px 0 rgba(255, 255, 255, .025);
+	transition:
+		border-color .3s ease,
+		box-shadow .3s ease,
+		background .3s ease;
 }
 
-.search-box input[type="text"]::placeholder {
-	color: rgba(255, 255, 255, 0.32);
-	font-family: 'Cormorant Garamond', serif;
-	font-style: italic;
-	font-size: clamp(17px, 3vw, 21px);
+.search:hover {
+	border-color: #303030;
+}
+
+.search:focus-within {
+	background: #121212;
+	border-color: #3a3a3a;
+	box-shadow:
+		0 24px 70px rgba(0, 0, 0, .55),
+		0 0 0 1px rgba(255, 255, 255, .025);
+}
+
+.icon {
+	width: 20px;
+	height: 20px;
+	flex: 0 0 20px;
+	color: #777;
+	transition: color .3s ease;
+}
+
+.search:focus-within .icon {
+	color: #bcbcbc;
+}
+
+.input {
+	width: 100%;
+	border: 0;
+	outline: 0;
+	background: transparent;
+	color: #eeeeee;
+	font-size: 16px;
 	font-weight: 400;
-	letter-spacing: 1px;
+	letter-spacing: -.01em;
+	font-family: inherit;
 }
 
-.search-box input[type="text"]:focus {
-	border-color: rgba(201, 162, 39, 0.35);
-	background: rgba(255, 255, 255, 0.05);
+.input::placeholder {
+	color: #555;
+	transition: color .3s ease;
 }
 
-.search-btn {
-	position: absolute;
-	right: clamp(6px, 1.5vw, 11px);
-	top: 50%;
-	transform: translateY(-50%);
-	width: clamp(40px, 6.5vw, 48px);
-	height: clamp(40px, 6.5vw, 48px);
-	border-radius: 50%;
-	background: rgba(201, 162, 39, 0.07);
-	border: 1px solid rgba(201, 162, 39, 0.28);
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-	transition: background 0.2s, border-color 0.2s;
-	padding: 0;
+.input:focus::placeholder {
+	color: #444;
 }
 
-.search-btn:hover {
-	background: rgba(201, 162, 39, 0.15);
-	border-color: rgba(201, 162, 39, 0.45);
-}
-
-.search-btn svg {
-	width: clamp(16px, 2.8vw, 19px);
-	height: clamp(16px, 2.8vw, 19px);
-	stroke: #c9a227;
-	fill: none;
-}
-
-/* ===== Divider & Tagline ===== */
-.divider {
-	margin-top: clamp(18px, 3.5vh, 28px);
-	width: clamp(140px, 30vw, 220px);
-	height: 1px;
-	background: linear-gradient(90deg, transparent, rgba(201, 162, 39, 0.35), transparent);
-}
-
-.tagline {
-	margin-top: clamp(12px, 2.5vh, 18px);
-	font-family: 'Cormorant Garamond', serif;
-	font-size: clamp(12px, 2vw, 14px);
-	color: rgba(255, 255, 255, 0.18);
-	letter-spacing: clamp(1.5px, 0.6vw, 3px);
+.shortcut {
+	flex: 0 0 auto;
+	padding: 6px 9px;
+	border: 1px solid #282828;
+	border-radius: 8px;
+	color: #555;
+	background: #151515;
+	font-size: 11px;
+	letter-spacing: .04em;
+	font-weight: 500;
 	user-select: none;
-	text-align: center;
+}
+
+/* ===== Tagline ===== */
+.tagline {
+	margin-top: 28px;
+	font-size: 13px;
+	color: #3a3a3a;
+	letter-spacing: 1.5px;
+	user-select: none;
 }
 
 /* ===== Errors ===== */
 .error-area {
 	position: absolute;
-	bottom: clamp(20px, 4vh, 40px);
+	bottom: 40px;
 	left: 50%;
 	transform: translateX(-50%);
 	text-align: center;
@@ -189,12 +134,12 @@ main {
 #sj-error {
 	color: #ff6b6b !important;
 	white-space: pre-wrap;
-	font-size: clamp(13px, 2vw, 14px);
+	font-size: 14px;
 }
 
 #sj-error-code {
 	font-size: 12px;
-	color: #aaa;
+	color: #888;
 	font-family: "Courier New", Courier, monospace;
 	margin-top: 6px;
 }
@@ -207,80 +152,49 @@ main {
 	left: 0;
 	width: 100vw;
 	height: 100vh;
-	background-color: #030303;
+	background-color: #090909;
 	z-index: 100;
 }
 
-/* ========== Адаптация под разные экраны ========== */
+/* ========== Адаптация ========== */
 
-/* Планшеты и меньше */
-@media (max-width: 768px) {
-	.wing {
-		width: 56px;
+@media (max-width: 480px) {
+	.search {
 		height: 56px;
-	}
-}
-
-/* Мобильные */
-@media (max-width: 560px) {
-	.wing {
-		display: none; /* на очень узких экранах крылья прячем */
+		padding: 0 16px;
+		gap: 12px;
+		border-radius: 16px;
 	}
 
-	.search-shell {
-		gap: 0;
+	.icon {
+		width: 18px;
+		height: 18px;
+		flex: 0 0 18px;
 	}
 
-	.search-box {
-		max-width: 100%;
+	.input {
+		font-size: 15px;
+	}
+
+	.shortcut {
+		display: none; /* на мобильных прячем */
 	}
 
 	.brand {
 		letter-spacing: 4px;
-	}
-}
-
-/* Очень маленькие экраны */
-@media (max-width: 380px) {
-	.search-box input[type="text"] {
-		font-size: 14px;
-		padding-left: 18px;
-	}
-
-	.search-box input[type="text"]::placeholder {
-		font-size: 16px;
-	}
-}
-
-/* Большие мониторы / ультраширокие */
-@media (min-width: 1400px) {
-	.search-box {
-		max-width: 640px;
-		height: 76px;
-	}
-
-	.wing {
-		width: 120px;
-		height: 120px;
-	}
-
-	.brand {
-		font-size: 14px;
-		letter-spacing: 10px;
-	}
-}
-
-/* Высота экрана (вертикальная адаптация) */
-@media (max-height: 600px) {
-	.brand {
-		margin-bottom: 20px;
-	}
-
-	.divider {
-		margin-top: 16px;
+		margin-bottom: 28px;
 	}
 
 	.tagline {
-		margin-top: 10px;
+		font-size: 12px;
+	}
+}
+
+@media (max-height: 500px) {
+	.brand {
+		margin-bottom: 20px;
+	}
+	.tagline {
+		margin-top: 18px;
 	}
 }
