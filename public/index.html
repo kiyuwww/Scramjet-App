@@ -22,7 +22,7 @@
 
 		<!-- Блок авторизации -->
 		<div id="loginBox" class="login-box hidden">
-			<form id="login-form" class="search" style="margin-bottom: 12px;">
+			<form id="login-form" class="search" style="margin-bottom: 12px; flex-direction: column; height: auto; padding: 16px 20px;">
 				<input id="login-email" class="input" type="email" placeholder="Email" autocomplete="username" />
 				<input id="login-password" class="input" type="password" placeholder="Пароль" autocomplete="current-password" style="margin-top: 8px;" />
 			</form>
@@ -34,7 +34,8 @@
 		<button id="logout-btn" type="button" class="hidden" style="margin-bottom:12px;">Выйти</button>
 
 		<form id="sj-form" class="search">
-			<svg class="icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<!-- Размеры заданы прямо в SVG -->
+			<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<circle cx="11" cy="11" r="6.5" stroke="currentColor" stroke-width="1.5"/>
 				<path d="M16 16L21 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
 			</svg>
