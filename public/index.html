@@ -25,7 +25,7 @@
 
 		<form id="sj-form" class="search-shell">
 			<!-- Левое крыло -->
-			<svg class="wing" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+			<svg class="wing wing-left" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<defs>
 					<linearGradient id="wgL" x1="100%" y1="50%" x2="0%" y2="50%">
 						<stop offset="0%" stop-color="rgba(255,255,255,0.55)"/>
@@ -61,7 +61,7 @@
 			</div>
 
 			<!-- Правое крыло -->
-			<svg class="wing" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+			<svg class="wing wing-right" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
 				<defs>
 					<linearGradient id="wgR" x1="100%" y1="50%" x2="0%" y2="50%">
 						<stop offset="0%" stop-color="rgba(255,255,255,0.55)"/>
@@ -78,7 +78,6 @@
 		<div class="divider"></div>
 		<div class="tagline">В каждом запросе — простор</div>
 
-		<!-- Ошибки (скрыты по умолчанию) -->
 		<div class="error-area">
 			<p id="sj-error"></p>
 			<pre id="sj-error-code"></pre>
@@ -86,9 +85,9 @@
 	</main>
 
 	<script>
-		// Генерация звёзд
 		const container = document.getElementById('stars');
-		for (let i = 0; i < 80; i++) {
+		const starCount = window.innerWidth < 600 ? 40 : 80;
+		for (let i = 0; i < starCount; i++) {
 			const d = document.createElement('div');
 			d.className = 'star';
 			d.style.left = Math.random() * 100 + 'vw';
