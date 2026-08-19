@@ -1,54 +1,104 @@
 <!doctype html>
-<html>
-	<head>
-		<meta charset="utf-8" />
-		<meta
-			name="viewport"
-			content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
-		/>
-		<title>FreeNet</title>
+<html lang="ru">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+	<title>Свобода</title>
 
-		<link rel="shortcut icon" content="favicon.ico" />
-	
-		<script src="/scram/scramjet.all.js"></script>
-		<script src="/baremux/index.js"></script>
-		
-		<link rel="stylesheet" href="index.css" />
-		<script src="register-sw.js" defer></script>
-		<script src="search.js" defer></script>
-		<script src="index.js" defer></script>
-	</head>
+	<link rel="shortcut icon" content="favicon.ico" />
+	<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 
-	<body>
-		<div class="flex-center logo-wrapper header-center">
-			<div class="brand">
-				<span class="brand-icon">◈</span>
-				<h1>FreeNet</h1>
+	<script src="/scram/scramjet.all.js"></script>
+	<script src="/baremux/index.js"></script>
+
+	<link rel="stylesheet" href="index.css" />
+	<script src="register-sw.js" defer></script>
+	<script src="search.js" defer></script>
+	<script src="index.js" defer></script>
+</head>
+<body>
+	<div class="vignette"></div>
+	<div class="stars" id="stars"></div>
+
+	<main>
+		<div class="brand">Свобода</div>
+
+		<form id="sj-form" class="search-shell">
+			<!-- Левое крыло -->
+			<svg class="wing" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+				<defs>
+					<linearGradient id="wgL" x1="100%" y1="50%" x2="0%" y2="50%">
+						<stop offset="0%" stop-color="rgba(255,255,255,0.55)"/>
+						<stop offset="100%" stop-color="rgba(255,255,255,0.03)"/>
+					</linearGradient>
+				</defs>
+				<path d="M90 50 C 75 25, 45 15, 25 25 C 10 35, 10 65, 25 75 C 45 85, 75 75, 90 50"
+				      fill="url(#wgL)" opacity="0.35" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+				<path d="M90 50 Q 65 46, 35 42" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>
+				<path d="M90 50 Q 65 54, 35 58" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>
+			</svg>
+
+			<div class="search-box">
+				<input
+					id="sj-search-engine"
+					value="https://www.google.com/search?q=%s"
+					type="hidden"
+				/>
+				<input
+					id="sj-address"
+					type="text"
+					placeholder="Найди свою свободу..."
+					autocomplete="off"
+					spellcheck="false"
+				/>
+				<button type="submit" class="search-btn" aria-label="Поиск">
+					<svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/>
+						<line x1="16" y1="8" x2="2" y2="22"/>
+						<line x1="17.5" y1="15" x2="9" y2="15"/>
+					</svg>
+				</button>
 			</div>
-			<p class="tagline">Browse freely. Stay unbound.</p>
-		</div>
 
-		<form id="sj-form" class="flex-center">
-			<input
-				id="sj-search-engine"
-				value="https://www.google.com/search?q=%s"
-				type="hidden"
-			/>
-			<input id="sj-address" type="text" placeholder="Search or enter address..." autocomplete="off" spellcheck="false" />
+			<!-- Правое крыло -->
+			<svg class="wing" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="transform: scaleX(-1);">
+				<defs>
+					<linearGradient id="wgR" x1="100%" y1="50%" x2="0%" y2="50%">
+						<stop offset="0%" stop-color="rgba(255,255,255,0.55)"/>
+						<stop offset="100%" stop-color="rgba(255,255,255,0.03)"/>
+					</linearGradient>
+				</defs>
+				<path d="M90 50 C 75 25, 45 15, 25 25 C 10 35, 10 65, 25 75 C 45 85, 75 75, 90 50"
+				      fill="url(#wgR)" opacity="0.35" stroke="rgba(255,255,255,0.22)" stroke-width="1"/>
+				<path d="M90 50 Q 65 46, 35 42" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>
+				<path d="M90 50 Q 65 54, 35 58" stroke="rgba(255,255,255,0.18)" stroke-width="0.8" fill="none"/>
+			</svg>
 		</form>
 
-		<div class="desc left-margin">
+		<div class="divider"></div>
+		<div class="tagline">В каждом запросе — простор</div>
+
+		<!-- Ошибки (скрыты по умолчанию) -->
+		<div class="error-area">
 			<p id="sj-error"></p>
 			<pre id="sj-error-code"></pre>
 		</div>
+	</main>
 
-		<footer>
-			<div>
-				<a href="credits.html">Credits</a>
-			</div>
-			<div>
-				<span>FreeNet</span>
-			</div>
-		</footer>
-	</body>
+	<script>
+		// Генерация звёзд
+		const container = document.getElementById('stars');
+		for (let i = 0; i < 80; i++) {
+			const d = document.createElement('div');
+			d.className = 'star';
+			d.style.left = Math.random() * 100 + 'vw';
+			d.style.top = Math.random() * 100 + 'vh';
+			const s = Math.random() * 2.5 + 0.8;
+			d.style.width = s + 'px';
+			d.style.height = s + 'px';
+			d.style.opacity = Math.random() * 0.25 + 0.04;
+			container.appendChild(d);
+		}
+	</script>
+</body>
 </html>
